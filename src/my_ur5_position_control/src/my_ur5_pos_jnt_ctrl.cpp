@@ -68,11 +68,6 @@ void Get_ee_goal_pos(KDL::Frame ee_pos_start, KDL::Vector* ee_goal_pos_vector, f
 		std::cout << "Time of motion:";
 		std::cin >> (*max_time);
 
-		// ros::param::get("x_pos", x_pos);
-		// ros::param::get("y_pos", y_pos);
-		// ros::param::get("z_pos", z_pos);
-		// ros::param::get("max_time", *max_time);
-
 		//Compute goal position
 		(*ee_goal_pos_vector)(0) = (ee_pos_start.p(0) + x_pos);
 		(*ee_goal_pos_vector)(1) = (ee_pos_start.p(1) + y_pos);
@@ -135,7 +130,7 @@ int main(int argc, char **argv)
 	int count = 0;
 	while (ros::ok()) {
 
-		//Compute current tcp position
+		//Compute current end effect position
 		KDL::Frame ee_pos_start;
 		fk_solver.JntToCart(start_of_joint_pos	, ee_pos_start);
 

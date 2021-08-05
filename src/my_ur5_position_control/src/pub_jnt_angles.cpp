@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 	while (ros::ok()) {
 
 		std_msgs::Float64 position[6];
-
+		//publish to all joints with sine function
 		for (int k = 0; k < 6; k++)
 		{
 			for (int i = 0; i < 2*pi; i++){
