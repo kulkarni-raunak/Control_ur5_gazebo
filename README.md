@@ -12,7 +12,9 @@ All the data is in src folder and arranged according to different tasks.
 
  Use the following command
  
- '''roslaunch my-ur5-position-control just_pub_jnt_angles.launch'''
+ '''
+ roslaunch my-ur5-position-control just_pub_jnt_angles.launch
+ '''
  
  ## Task 2 - Control the joint angles of ur5 to attempt a particular enf effector configuration on application on constant force on the later
  
