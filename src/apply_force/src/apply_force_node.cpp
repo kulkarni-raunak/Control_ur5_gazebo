@@ -19,21 +19,16 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "apply_force_node");
     ros::NodeHandle nh;
 
+    //Create rosservice client to apply constant force on last link.
     ros::ServiceClient wrenchClient = nh.serviceClient<gazebo_msgs::ApplyBodyWrench>("/gazebo/apply_body_wrench");
     gazebo_msgs::ApplyBodyWrench::Request apply_wrench_req;
     gazebo_msgs::ApplyBodyWrench::Response apply_wrench_resp;
 
-    // gazebo::physics::Model GetBody(const std::string &name);
-
-    //std::cout<<name<<std::endl;
-
     bool service_ready = false;
     while (!service_ready) {
           service_ready = ros::service::exists("/gazebo/apply_body_wrench", true);
-         // ROS_INFO("waiting for apply_body_wrench service");
           ros::Duration(0.5).sleep();
     }
-    //ROS_INFO("apply_body_wrench service is ready");
 
     ros::Time time_temp(0, 0);
     ros::Duration duration_temp(0, 1000000);
