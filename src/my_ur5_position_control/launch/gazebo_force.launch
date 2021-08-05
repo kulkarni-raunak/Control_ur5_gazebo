@@ -1,0 +1,26 @@
+<launch>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="paused" value="false" />
+  </include>
+
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-file $(find my-ur5-position-control)/urdf/ur5_robot.urdf -urdf -x 0 -y 0 -z 0.1 -model ur5 -J shoulder_lift_joint -1.5 -J elbow_joint 1.0" />
+
+  <include file="$(find my-ur5-position-control)/launch/ur5_joint_position_control.launch" />
+  
+<!-- <node name="node_publish_joint_angle" pkg="my-ur5-position-control" type="pub_jnt_angles"/> -->
+
+  <!-- <node name="wrist_3_joint" pkg="apply_force" type="apply_force_node"
+        output="screen" > launch-prefix="xterm -e" >
+    <param name="gazebo_transport_topic_to_sub" type="str" value="/gazebo/default/ur5/wrist_3_joint/wrist_3_joint_force_torque/wrench" />
+    <param name="ros_topic_to_pub" type="str" value="force_torque/ur5/wrist_3_joint_force_torque" />
+    <param name="ros_rate" type="double" value="100.0" />
+  </node> --> 
+ 
+  <node name="force" pkg="apply_force" type="apply_force_node"/>
+
+<!--	<node pkg="rosservice" type="rosservice" name="forces" args="call -wait /gazebo/apply_body_wrench '{body_name: wrist_3_link, reference_frame: world, wrench: { force: { x: 0, y: 0 , z: 50 } }, start_time: 0, 	duration: -1}'"/>
+-->
+  <node name="ctrl_joint_angles" pkg="my-ur5-position-control" type="my_ur5_pos_jnt_ctrl"/>
+
+</launch>

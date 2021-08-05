@@ -1,0 +1,13 @@
+<launch>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="paused" value="true" />
+  </include>
+
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-file $(find my-ur5-position-control)/urdf/ur5_robot.urdf -urdf -x 0 -y 0 -z 0.1 -model ur5 -J shoulder_lift_joint -1.5 -J elbow_joint 1.0" />
+
+  <include file="$(find my-ur5-position-control)/launch/ur5_joint_position_control.launch" />
+  
+ <node name="node_publish_joint_angle" pkg="my-ur5-position-control" type="pub_jnt_angles"/>
+ 
+</launch>
